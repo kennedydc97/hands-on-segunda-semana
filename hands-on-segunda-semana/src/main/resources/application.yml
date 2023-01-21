@@ -1,0 +1,12 @@
+server:
+  port: 8080
+  name: "My Application"
+
+spring:
+  config:
+    activate:
+      on-profile: dev
+  data:
+    mongodb:
+      auto-index-creation: true
+      uri: mongodb://localhost:27017/imc-calculator?retryWrites=true&w=majority&ssl=false
