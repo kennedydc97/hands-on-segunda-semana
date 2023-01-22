@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Data
@@ -24,7 +23,5 @@ public class ClientEntity {
     private int frequencyDaysInMonth;
     private String phoneNumber;
     private String address;
-    private LocalDateTime offsetDateTime;
-    private String createdBy;
 
 }

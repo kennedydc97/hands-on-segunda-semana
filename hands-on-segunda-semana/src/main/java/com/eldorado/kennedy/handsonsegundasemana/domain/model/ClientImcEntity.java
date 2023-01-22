@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.time.LocalDate;
 import java.util.UUID;
 
 @Data
@@ -22,6 +23,7 @@ public class ClientImcEntity {
     private UUID clientId;
     private double height;
     private double weight;
-
+    private double bodyMass;
     private ImcEntity imcEntity;
+    private LocalDate measurementDate;
 }

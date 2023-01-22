@@ -17,7 +17,6 @@ import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.groupingBy;
 
@@ -34,8 +33,6 @@ public class ClientService {
 
         var clientEntity = modelMapper.map(clientDto, ClientEntity.class);
         clientEntity.setId(UUID.randomUUID());
-        clientEntity.setOffsetDateTime(LocalDateTime.now());
-        clientEntity.setCreatedBy("Kennedy Dourado");
 
 
         var clientEntitySave = clientRepository.save(clientEntity);
@@ -46,25 +43,22 @@ public class ClientService {
         return clientDto;
     }
 
-    @SneakyThrows
-    public ClientImcDto getClientImc(UUID id) {
+    public ClientDto getClientImc(UUID id) throws Exception {
         var client = clientRepository.findById(id).
                 orElseThrow(() -> new Exception("NOT FOUND"));
 
         var clientImcs = clientImcRepository.findAllByClientId(id);
 
-        var clientCustom = Arrays.asList(modelMapper.map(clientImcs, ClientImcDto[].class));
+        var clientCustom = modelMapper.map(clientImcs, CustomImcList.class);
 
         var clientDto = modelMapper.map(client, ClientDto.class);
         clientDto.setClientImcs(clientCustom);
-        clientDto.setHasChanged(verifyChangeImc(clientImcs));
+        clientDto.setHasChanged(verifyIfImcHasChanged(clientImcs));
 
-        verifyChangeImc(clientImcs);
-
-        return null;
+        return clientDto;
     }
 
-    private boolean verifyChangeImc(List<ClientImcEntity> clientImcs) {
+    private boolean verifyIfImcHasChanged(List<ClientImcEntity> clientImcs) {
 
         return !clientImcs.
                 stream()

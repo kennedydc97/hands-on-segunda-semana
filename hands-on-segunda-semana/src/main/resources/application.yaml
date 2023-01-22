@@ -1,0 +1,21 @@
+server:
+  port: 8080
+  name: "My Second Week Application"
+---
+spring:
+  config:
+    activate:
+      on-profile: docker
+  data:
+    mongodb:
+      auto-index-creation: true
+      uri: ${MONGODB_CONNECTION_STRING}
+---
+spring:
+  config:
+    activate:
+      on-profile: dev
+  data:
+    mongodb:
+      auto-index-creation: true
+      uri: mongodb://localhost:27017/imc-calculator?retryWrites=true&w=majority&ssl=false

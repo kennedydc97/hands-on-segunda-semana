@@ -1,4 +1,6 @@
 package com.eldorado.kennedy.handsonsegundasemana.dto;
 
-public class CustomImcList {
+import java.util.ArrayList;
+
+public class CustomImcList extends ArrayList<ImcBaseDto> {
 }

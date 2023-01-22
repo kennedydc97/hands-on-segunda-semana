@@ -20,7 +20,6 @@ public class ImcEntity implements Comparable<ImcEntity>{
     @Id
     private UUID id;
 
-    private UUID clientId;
     private Double bodyMass;
     private String classification;
     private String obesityLevel;

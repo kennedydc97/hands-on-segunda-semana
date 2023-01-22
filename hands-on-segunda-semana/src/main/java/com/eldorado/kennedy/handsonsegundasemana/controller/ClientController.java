@@ -1,7 +1,6 @@
 package com.eldorado.kennedy.handsonsegundasemana.controller;
 
 import com.eldorado.kennedy.handsonsegundasemana.dto.ClientDto;
-import com.eldorado.kennedy.handsonsegundasemana.dto.ClientImcDto;
 import com.eldorado.kennedy.handsonsegundasemana.service.ClientService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -26,23 +25,12 @@ public class ClientController {
     }
 
     @GetMapping
-    public ResponseEntity<ClientImcDto> getClientImc(@PathVariable UUID clientId) {
-        return ResponseEntity.status(HttpStatus.FOUND).body(clientService.getClientImc(clientId));
-    }
-
-    @PutMapping("/{clientId}")
-    public void updateClient(@PathVariable UUID imcId) {
-        log.warn("PUT IMC Not IMPLEMENTED {}", imcId);
-    }
-
-    @DeleteMapping("/{clientId}")
-    public void deleteClient(@PathVariable UUID imcId) {
-        log.warn("DELETE IMC Not IMPLEMENTED {}", imcId);
-    }
-
-    @GetMapping("/{clientId}")
-    public void getImc(@PathVariable UUID imcId) {
-        log.warn("GET IMC BY ID Not IMPLEMENTED {}", imcId);
+    public ResponseEntity<?> getClientImc(@PathVariable UUID clientId) {
+        try {
+            return ResponseEntity.status(HttpStatus.FOUND).body(clientService.getClientImc(clientId));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
     }
 
 }
